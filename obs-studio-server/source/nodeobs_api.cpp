@@ -410,9 +410,9 @@ uint32_t pid = GetCurrentProcessId();
 std::vector<char> registerProcess(void)
 {
 	std::vector<char> buffer;
-	buffer.resize(sizeof(uint8_t) + sizeof(bool) + sizeof(uint32_t));
 	uint8_t action     = 0;
 	bool    isCritical = true;
+	buffer.resize(sizeof(action) + sizeof(isCritical) + sizeof(pid));
 
 	uint32_t offset = 0;
 
@@ -428,8 +428,8 @@ std::vector<char> registerProcess(void)
 std::vector<char> unregisterProcess(void)
 {
 	std::vector<char> buffer;
-	buffer.resize(sizeof(uint8_t) + sizeof(uint32_t));
 	uint8_t action = 1;
+	buffer.resize(sizeof(action) + sizeof(pid));
 
 	uint32_t offset = 0;
 
@@ -443,8 +443,8 @@ std::vector<char> unregisterProcess(void)
 std::vector<char> terminateCrashHandler(void)
 {
 	std::vector<char> buffer;
-	buffer.resize(sizeof(uint8_t) + sizeof(uint32_t));
 	uint8_t action = 2;
+	buffer.resize(sizeof(action) + sizeof(pid));
 
 	uint32_t offset = 0;
 
